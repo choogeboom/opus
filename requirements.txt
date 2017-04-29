@@ -1,3 +1,27 @@
-flask==0.12
+flask
 
-docker-compose==1.13.0rc1
+# Application server for both development and production
+gunicorn
+
+# Testing and static analysis
+pytest
+pytest-cov
+flake8
+
+# CLI
+click
+
+# Data and Workers
+psycopg2
+flask-sqlalchemy
+redis
+celery
+
+# Forms
+flask-wtf
+wtforms-components
+
+# Extensions
+flask-debugtoolbar=0.10.1
+flask-mail
+flask-login
