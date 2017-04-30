@@ -1,0 +1,64 @@
+{% import 'macros/flash.html' as flash with context %}
+{% import 'macros/style.html' as style %}
+{% import 'macros/script.html' as script %}
+
+{% set title = title | default('opus') %}
+{% set main_styles = ['vendor/bootstrap.min.css',
+                      'vendor/font-awesome.min.css',
+                      'main.css'] %}
+{% set additional_styles = additional_styles | default([]) %}
+
+{% set main_scripts = ['vendor/bootstrap.min.js', 'jquery-3.2.1.js'] %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="{% block meta_description %}{% endblock %}">
+
+  <title>{{ title|escape }}</title>
+
+  {% for s in main_styles %}
+    {{ style.link(s) }}
+  {% endfor %}
+
+  {% for s in additional_styles %}
+    {{ style.link(s) }}
+  {% endfor %}
+
+
+  {% block head_scripts %}{% endblock %}
+
+</head>
+<body>
+{% block before_main %}{% endblock %}
+
+<main class="container">
+  {{ flash.render() }}
+
+  <div class="md-margin-top">
+    {% block main_header %}{% endblock %}
+  </div>
+  <div class="container">
+    {% block main_content %}{% endblock %}
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <ul class="list-inline">
+      <li class="text-muted">Opus &copy; 2017</li>
+      {% block footer %}{% endblock %}
+    </ul>
+  </div>
+</footer>
+
+{% for s in main_scripts %}
+  {{ script.src(s) }}
+{% endfor %}
+
+</body>
+</html>

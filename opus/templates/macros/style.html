@@ -1,0 +1,5 @@
+{%- macro link(path) -%}
+  <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename=['styles', path] | join('/')) }}">
+{% endmacro %}

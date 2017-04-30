@@ -1,0 +1,6 @@
+{% macro src(path,) %}
+  {% set fp = ['scripts', path] | join('/') %}
+  <script
+      src="{{ url_for('static', filename=fp) }}" {{ kwargs | join_attribute }}>
+  </script>
+{% endmacro %}

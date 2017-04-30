@@ -1,11 +1,15 @@
-from typing import Iterable
+from typing import Iterable, Tuple
 
 from flask import Flask, Blueprint
+
+from lib.jinja import join_attribute
 
 
 ACTIVE_BLUEPRINTS = []
 
 ACTIVE_EXTENSIONS = []
+
+CUSTOM_FILTERS = [join_attribute]
 
 
 def create_app(settings_override: dict=None):
@@ -23,6 +27,7 @@ def create_app(settings_override: dict=None):
         app.config.update(settings_override)
 
     register_blueprints(app)
+    register_custom_filters(app)
     initialize_extensions(app)
 
 
@@ -36,6 +41,18 @@ def register_blueprints(app: Flask, blueprints: Iterable[Blueprint]=ACTIVE_BLUEP
     """
     for bp in blueprints:
         app.register_blueprint(bp)
+
+
+def register_custom_filters(app: Flask, filters: Iterable[function]=CUSTOM_FILTERS) -> None:
+    """
+    Register all of the specified custom filters with the Jinja environment
+    
+    :param app: Flask app
+    :param filters: sequence of pairs filters
+    :return: 
+    """
+    for f in filters:
+        app.jinja_env.filters[f.__name__] = f
 
 
 def initialize_extensions(app: Flask, extensions: Iterable=ACTIVE_EXTENSIONS) -> None:

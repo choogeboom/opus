@@ -22,6 +22,6 @@ flask-wtf
 wtforms-components
 
 # Extensions
-flask-debugtoolbar=0.10.1
+flask-debugtoolbar==0.10.1
 flask-mail
 flask-login
