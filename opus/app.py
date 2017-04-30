@@ -1,11 +1,12 @@
-from typing import Iterable, Tuple
+from typing import Iterable, Tuple, Callable
 
 from flask import Flask, Blueprint
 
 from lib.jinja import join_attribute
+from opus.blueprints.page import page
 
 
-ACTIVE_BLUEPRINTS = []
+ACTIVE_BLUEPRINTS = [page]
 
 ACTIVE_EXTENSIONS = []
 
@@ -30,6 +31,8 @@ def create_app(settings_override: dict=None):
     register_custom_filters(app)
     initialize_extensions(app)
 
+    return app
+
 
 def register_blueprints(app: Flask, blueprints: Iterable[Blueprint]=ACTIVE_BLUEPRINTS) -> None:
     """
@@ -43,7 +46,7 @@ def register_blueprints(app: Flask, blueprints: Iterable[Blueprint]=ACTIVE_BLUEP
         app.register_blueprint(bp)
 
 
-def register_custom_filters(app: Flask, filters: Iterable[function]=CUSTOM_FILTERS) -> None:
+def register_custom_filters(app: Flask, filters: Iterable[Callable]=CUSTOM_FILTERS) -> None:
     """
     Register all of the specified custom filters with the Jinja environment
     
