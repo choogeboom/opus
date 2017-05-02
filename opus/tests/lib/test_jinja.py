@@ -33,8 +33,9 @@ def test_join_attributes_iterable():
 def test_join_attributes_template():
     env = Environment()
     env.filters['join_attribute'] = join_attribute
-    temp = env.from_string("{% set d = {'first': 'value1', 'second': 'value2'} %}" 
-                           "{{ d | join_attribute }}")
+    temp = env.from_string(
+        "{% set d = {'first': 'value1', 'second': 'value2'} %}"
+        "{{ d | join_attribute }}")
     expected_str = 'first="value1" second="value2"'
     actual_str = temp.render()
     assert actual_str == expected_str

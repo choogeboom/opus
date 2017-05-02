@@ -1,2 +1,4 @@
 .idea
 /instance/settings.py
+.coverage
+.cache

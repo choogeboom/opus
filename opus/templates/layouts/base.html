@@ -8,7 +8,7 @@
                       'main.css'] %}
 {% set additional_styles = additional_styles | default([]) %}
 
-{% set main_scripts = ['vendor/bootstrap.min.js', 'jquery-3.2.1.js'] %}
+{% set main_scripts = ['vendor/bootstrap.min.js'] %}
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,9 @@
     {{ style.link(s) }}
   {% endfor %}
 
-
+  <script src="https://code.jquery.com/jquery-1.12.2.min.js"
+            integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk="
+            crossorigin="anonymous"></script>
   {% block head_scripts %}{% endblock %}
 
 </head>

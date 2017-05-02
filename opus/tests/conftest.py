@@ -7,8 +7,8 @@ from opus.app import create_app
 def app():
     """
     Setup our flask app
-    
-    :return: 
+
+    :return:
     """
     params = {'DEBUG': False,
               'TESTING': True}
@@ -27,8 +27,8 @@ def app():
 def client(app):
     """
     Set up an app client
-    
-    :param app: 
-    :return: 
+
+    :param app:
+    :return:
     """
     yield app.test_client()
